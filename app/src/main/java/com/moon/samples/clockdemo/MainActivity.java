@@ -1,5 +1,6 @@
 package com.moon.samples.clockdemo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         timeTextView = (TextView) findViewById(R.id.timeView);
 
         startOrPauseBtn.setText("暂停");
+        startOrPauseBtn.setBackground(null);
+        startOrPauseBtn.setTextColor(Color.BLACK);
 
         // 开始或暂停
         startOrPauseBtn.setOnClickListener(new View.OnClickListener() {
@@ -35,10 +38,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (clockView.isPause){
                     clockView.start();
-                    startOrPauseBtn.setText("开始");
+                    startOrPauseBtn.setText("暂停");
+                    startOrPauseBtn.setBackground(null);
+                    startOrPauseBtn.setTextColor(Color.BLACK);
                 }else {
                     clockView.pause();
-                    startOrPauseBtn.setText("暂停");
+                    startOrPauseBtn.setText("开始");
+                    startOrPauseBtn.setBackgroundColor(Color.RED);
+                    startOrPauseBtn.setTextColor(Color.WHITE);
                 }
             }
         });
@@ -47,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.adjust).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 17/8/12
+                clockView.correctTime(Calendar.getInstance());
+
             }
         });
 
@@ -61,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
           @Override
           public void onFinish() {
-              // TODO: 17/8/12
+              // TODO: 17/8/12 我们活不到这个方法的回调
 
           }
       }.start();
